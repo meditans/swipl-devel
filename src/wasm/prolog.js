@@ -1155,10 +1155,13 @@ class Prolog
    */
 
   query(...argv)
-  { if ( typeof argv[3] === "number" )
+  { console.log("Invoking query ------------------------------------------")
+    const mark = this.bindings.WASM_mark_string_buffers();
+    if ( typeof argv[3] === "number" )
       return this.__query(...argv)
     else
       return this.query2(...argv)
+    this.bindings.PL_release_string_buffers_from_mark(mark);
   }
 
   /** Run a  query from a  goal represented  as a string,  an optional
